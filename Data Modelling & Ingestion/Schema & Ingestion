@@ -29,7 +29,7 @@ CREATE TABLE fitness.nutrition (
     proband_id INT NOT NULL REFERENCES fitness.proband(proband_id)
 );
 
-/*load probands first beacause of reference in other tables*/
+/*fill tables*/
 COPY fitness.proband(proband_id, age, gender, weight, bmi, height, workout_frequency) 
 FROM 'C:\Program Files\PostgreSQL\18\data\fitness_db\proband_probid.CSV'
 WITH (FORMAT csv, HEADER, DELIMITER ',');
@@ -42,4 +42,6 @@ COPY fitness.nutrition(proband_id, water_intake, meal_frequency, calories)
 FROM 'C:\Program Files\PostgreSQL\18\data\fitness_db\nutrition_probid.CSV'
 WITH (FORMAT csv, HEADER, DELIMITER ',');
 
-SELECT * FROM fitness.nutrition;
+/*test*/
+/*SELECT * FROM fitness.nutrition;*/
+
