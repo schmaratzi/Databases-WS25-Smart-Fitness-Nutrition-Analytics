@@ -24,7 +24,7 @@ plt.scatter(female_df['Calories'], female_df['calories_burned_per_hour'], color=
 male_df = merge_df[merge_df['Gender'] == 'Male']
 plt.scatter(male_df['Calories'], male_df['calories_burned_per_hour'], color='blue', alpha=0.5, label='Male')
 
-plt.title('Calories Consumed vs Calories Burned per Hour')
+plt.title('Query 4: Calories Consumed vs Calories Burned per Hour')
 plt.xlabel('Calories Consumed')
 plt.ylabel('Calories Burned per Hour')
 plt.legend()

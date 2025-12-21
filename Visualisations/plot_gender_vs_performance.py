@@ -27,6 +27,9 @@ plt.title('Session Duration by Gender')
 plt.ylabel('Session Duration (hours)')
 
 plt.tight_layout()
+#Add a main title
+plt.suptitle('Query 3: Gender vs Performance Metrics')
+
 #Save the figure
 plt.savefig('boxplots_gender_vs_performance.png')
 print("Created boxplots_gender_vs_performance.png")
