@@ -43,8 +43,19 @@ FROM 'C:\Program Files\PostgreSQL\18\data\fitness_db\nutrition_probid.CSV'
 WITH (FORMAT csv, HEADER, DELIMITER ',');
 
 /*Is nutritional intake (calories and water) associated with workout intensity, and does this association differ by gender?*/
+/*workout intensity is approximated as calories burned per hour, so calories_burned/duration 
+calculate correlation between 
+(1) calories intake and calories burned by hour and 
+(2) water intake and caloires burned per hour
+separately for each gender*/
 SELECT
   p.gender,
+/*CORR(x, y) returns the Pearson correlation coefficient between x and y.
+Remembder: Descriptive only, no prove of causality.
+Range: -1 to +1
+    +1 = strong positive relationship (higher intake -> higher intensity)
+    0 = no linear relationship
+    -1 = strong negative relationship (higher intake -> lower intensity)*/
   CORR(n.calories, w.calories_burned / NULLIF(w.duration, 0)) AS corr_intake_vs_burn_per_hour,
   CORR(n.water_intake, w.calories_burned / NULLIF(w.duration, 0)) AS corr_water_vs_burn_per_hour
 FROM fitness.proband p
@@ -52,5 +63,8 @@ JOIN fitness.workout w
   ON p.proband_id = w.proband_id
 JOIN fitness.nutrition n
   ON p.proband_id = n.proband_id
+/*group by gender to compute correlations separately for each gender group*/
 GROUP BY p.gender
+/*sort alphabetically by gender*/
 ORDER BY p.gender;
+
